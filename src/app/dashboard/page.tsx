@@ -73,7 +73,6 @@ function DashboardPage() {
       />
 
       <ResponsiveGridLayout
-        className="layout"
         layouts={{ lg: layout }}
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
         cols={{ lg: 3, md: 2, sm: 1, xs: 1, xxs: 1 }}
@@ -82,7 +81,7 @@ function DashboardPage() {
         isResizable={editMode}
         isDraggable={editMode}
         style={{ background: 'transparent' }}
-        compactType={'horizontal'}
+        containerPadding={[0, 0]}
       >
         <div key="income">
           <DraggableCard title="Income 💰">
