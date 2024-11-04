@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Pie, PieChart, ResponsiveContainer, Treemap } from 'recharts';
+import { Pie, PieChart, ResponsiveContainer } from 'recharts';
 
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
@@ -12,7 +12,6 @@ import DraggableCard from '../components/DraggableCard';
 import CostTable from '../components/CostTable';
 
 import { LayoutItem, Data } from '../types';
-import { toast } from 'sonner';
 import EditButton from '../components/EditButton';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -40,11 +39,10 @@ function DashboardPage() {
     const savedLayout = JSON.parse(
       localStorage.getItem('dashboardLayout') || '[]'
     );
-    // setLayout(savedLayout.length > 0 ? savedLayout : generateDefaultLayout());
-    setLayout(generateDefaultLayout());
+    setLayout(savedLayout.length > 0 ? savedLayout : generateDefaultLayout());
 
     setLoading(false);
-  }, []);
+  }, [router]);
 
   const generateDefaultLayout = (): LayoutItem[] => {
     return [

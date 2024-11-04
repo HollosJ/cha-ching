@@ -1,8 +1,6 @@
 import React from 'react';
 
-type Props = {};
-
-const NavBar = (props: Props) => {
+const NavBar = () => {
   return (
     <nav className="bg-emerald-500 py-4">
       <div className="container flex justify-between flex-wrap items-center text-white">

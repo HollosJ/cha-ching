@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import NavBar from '@/app/components/NavBar';
 
-import { Bricolage_Grotesque, Space_Mono } from 'next/font/google';
+import { Space_Mono } from 'next/font/google';
 import { Toaster } from 'sonner';
 
 const space_mono = Space_Mono({
