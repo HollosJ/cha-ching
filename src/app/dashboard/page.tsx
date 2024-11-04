@@ -69,7 +69,7 @@ function DashboardPage() {
       <EditButton
         editMode={editMode}
         setEditMode={setEditMode}
-        className="absolute bottom-4 right-4"
+        className="fixed bottom-4 right-4 hidden md:flex"
       />
 
       <ResponsiveGridLayout
