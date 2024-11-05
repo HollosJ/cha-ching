@@ -47,10 +47,13 @@ function DashboardPage() {
   const generateDefaultLayout = (): LayoutItem[] => {
     return [
       { i: 'income', x: 0, y: 0, w: 1, h: 1 },
-      { i: 'home', x: 2, y: 0, w: 1, h: 1 },
-      { i: 'car', x: 1, y: 1, w: 1, h: 1 },
-      { i: 'food', x: 0, y: 1, w: 1, h: 1 },
       { i: 'subscriptions', x: 1, y: 0, w: 1, h: 3 },
+      { i: 'home', x: 2, y: 0, w: 1, h: 1 },
+
+      { i: 'food', x: 0, y: 1, w: 1, h: 1 },
+      { i: 'car', x: 2, y: 1, w: 1, h: 1 },
+
+      { i: 'utilities', x: 0, y: 2, w: 1, h: 1 },
       { i: 'tips', x: 2, y: 2, w: 1, h: 1 },
     ];
   };
