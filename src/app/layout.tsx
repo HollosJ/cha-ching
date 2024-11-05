@@ -12,7 +12,7 @@ const space_mono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Cha-ching | Track your finances',
+  title: 'Cha-Ching | Track your finances',
   description: 'A simple app to help you track your finances',
 };
 
