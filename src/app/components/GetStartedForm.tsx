@@ -83,6 +83,7 @@ const validationSchema = object({
 const GetStartedForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [data, setData] = useState({});
+  const [submitting, setSubmitting] = useState(false);
   const router = useRouter();
 
   const steps: { [key: number]: string } = {
@@ -107,9 +108,9 @@ const GetStartedForm = () => {
     // If last step, we should submit all this data and redirect to the dashboard
     // Else, move to next step
     if (currentStep === Object.keys(steps).length - 1) {
-      console.log('Submitting all data:', mergedData);
-      localStorage.setItem('data', JSON.stringify(mergedData));
+      setSubmitting(true);
 
+      localStorage.setItem('data', JSON.stringify(mergedData));
       router.push('/dashboard');
     } else {
       setCurrentStep(currentStep + 1);
@@ -137,8 +138,12 @@ const GetStartedForm = () => {
         )}
 
         {currentStep === Object.keys(steps).length - 1 && (
-          <button type="submit" className="button button--primary">
-            Submit
+          <button
+            type="submit"
+            className="button button--primary"
+            disabled={submitting}
+          >
+            {submitting ? 'Submitting...' : 'Submit'}
           </button>
         )}
       </div>

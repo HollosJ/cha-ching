@@ -35,6 +35,10 @@ h6 {
   @apply px-4 py-2 transition border-2 border-black hover:brightness-95;
 }
 
+.button:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
 .button--primary {
   @apply text-white bg-primary;
 }
