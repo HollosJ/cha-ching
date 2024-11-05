@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Get Started | Cha-ching',
-  description: 'Get started with Cha-ching',
+  title: 'Get Started | Cha-Ching',
+  description: 'Get started with Cha-Ching',
 };
 
 export default function GetStartedLayout({
