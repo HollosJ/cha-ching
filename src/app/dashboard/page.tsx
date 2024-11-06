@@ -13,6 +13,7 @@ import CostTable from '../components/CostTable';
 
 import { LayoutItem, Data } from '../types';
 import EditButton from '../components/EditButton';
+import DashboardLoadingGrid from '../components/DashboardLoadingGrid';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -63,115 +64,119 @@ function DashboardPage() {
     localStorage.setItem('dashboardLayout', JSON.stringify(newLayout));
   };
 
-  if (loading) return <div>Loading...</div>;
-
-  if (!data) return <div>No data available</div>;
-
   return (
-    <div className="container mx-auto p-4">
-      <EditButton
-        editMode={editMode}
-        setEditMode={setEditMode}
-        className="fixed bottom-4 right-4 hidden md:flex"
-      />
+    <div className="container p-4">
+      {loading && <DashboardLoadingGrid />}
 
-      <ResponsiveGridLayout
-        layouts={{ lg: layout }}
-        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 3, md: 2, sm: 1, xs: 1, xxs: 1 }}
-        rowHeight={300}
-        onLayoutChange={onLayoutChange}
-        isResizable={editMode}
-        isDraggable={editMode}
-        style={{ background: 'transparent' }}
-        containerPadding={[0, 0]}
-      >
-        <div key="income">
-          <DraggableCard title="Income 💰">
-            <h3 className="text-2xl md:text-4xl font-bold mb-4 text-primary">
-              £{data.income.toFixed(2)}
-            </h3>
-          </DraggableCard>
-        </div>
+      {!loading && !data && <>No data found</>}
 
-        <div key="home">
-          <DraggableCard title="Home 🏠">
-            <CostTable
-              data={[
-                { name: 'Rent/Mortgage', amount: data.homePayment },
-                { name: 'Council Tax', amount: data.homeCouncilTax },
-              ]}
-            />
-          </DraggableCard>
-        </div>
+      {data && (
+        <>
+          <EditButton
+            editMode={editMode}
+            setEditMode={setEditMode}
+            className="fixed bottom-4 right-4 hidden md:flex"
+          />
 
-        <div key="car">
-          <DraggableCard title="Car 🚗">
-            <CostTable
-              data={[
-                { name: 'Car Finance', amount: data.carFinance },
-                { name: 'Car Insurance', amount: data.carInsurance },
-                { name: 'Car Fuel', amount: data.carFuel },
-              ]}
-            />
-          </DraggableCard>
-        </div>
+          <ResponsiveGridLayout
+            layouts={{ lg: layout }}
+            breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+            cols={{ lg: 3, md: 2, sm: 1, xs: 1, xxs: 1 }}
+            rowHeight={300}
+            onLayoutChange={onLayoutChange}
+            isResizable={editMode}
+            isDraggable={editMode}
+            style={{ background: 'transparent' }}
+            containerPadding={[0, 0]}
+          >
+            <div key="income">
+              <DraggableCard title="Income 💰">
+                <h3 className="text-2xl md:text-4xl font-bold mb-4 text-primary">
+                  £{data.income.toFixed(2)}
+                </h3>
+              </DraggableCard>
+            </div>
 
-        <div key="food">
-          <DraggableCard title="Food 🍽️">
-            <CostTable
-              data={[
-                { name: 'Groceries', amount: data.foodGroceries },
-                { name: 'Eating Out', amount: data.foodEatingOut },
-              ]}
-            />
-          </DraggableCard>
-        </div>
+            <div key="home">
+              <DraggableCard title="Home 🏠">
+                <CostTable
+                  data={[
+                    { name: 'Rent/Mortgage', amount: data.homePayment },
+                    { name: 'Council Tax', amount: data.homeCouncilTax },
+                  ]}
+                />
+              </DraggableCard>
+            </div>
 
-        <div key="utilities">
-          <DraggableCard title="Utilities 🔌">
-            <CostTable
-              data={[
-                { name: 'Electricity', amount: data.utilitiesElectricity },
-                { name: 'Water', amount: data.utilitiesWater },
-                { name: 'Gas', amount: data.utilitiesGas },
-              ]}
-            />
-          </DraggableCard>
-        </div>
+            <div key="car">
+              <DraggableCard title="Car 🚗">
+                <CostTable
+                  data={[
+                    { name: 'Car Finance', amount: data.carFinance },
+                    { name: 'Car Insurance', amount: data.carInsurance },
+                    { name: 'Car Fuel', amount: data.carFuel },
+                  ]}
+                />
+              </DraggableCard>
+            </div>
 
-        {data.subscriptions && data.subscriptions.length > 0 && (
-          <div key="subscriptions">
-            <DraggableCard title="Subscriptions 📺">
-              <CostTable
-                data={data.subscriptions.map((sub) => ({
-                  name: sub.name,
-                  amount: sub.cost,
-                }))}
-                showTotal={false}
-              />
-              <ResponsiveContainer width="100%" height={200}>
-                <PieChart width={400} height={400}>
-                  <Pie
+            <div key="food">
+              <DraggableCard title="Food 🍽️">
+                <CostTable
+                  data={[
+                    { name: 'Groceries', amount: data.foodGroceries },
+                    { name: 'Eating Out', amount: data.foodEatingOut },
+                  ]}
+                />
+              </DraggableCard>
+            </div>
+
+            <div key="utilities">
+              <DraggableCard title="Utilities 🔌">
+                <CostTable
+                  data={[
+                    { name: 'Electricity', amount: data.utilitiesElectricity },
+                    { name: 'Water', amount: data.utilitiesWater },
+                    { name: 'Gas', amount: data.utilitiesGas },
+                  ]}
+                />
+              </DraggableCard>
+            </div>
+
+            {data.subscriptions && data.subscriptions.length > 0 && (
+              <div key="subscriptions">
+                <DraggableCard title="Subscriptions 📺">
+                  <CostTable
                     data={data.subscriptions.map((sub) => ({
                       name: sub.name,
-                      value: sub.cost,
+                      amount: sub.cost,
                     }))}
-                    dataKey="value"
-                    nameKey="name"
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
-                    fill="var(--primary)"
-                    label
+                    showTotal={false}
                   />
-                </PieChart>
-              </ResponsiveContainer>
-            </DraggableCard>
-          </div>
-        )}
-      </ResponsiveGridLayout>
+                  <ResponsiveContainer width="100%" height={200}>
+                    <PieChart width={400} height={400}>
+                      <Pie
+                        data={data.subscriptions.map((sub) => ({
+                          name: sub.name,
+                          value: sub.cost,
+                        }))}
+                        dataKey="value"
+                        nameKey="name"
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={60}
+                        outerRadius={80}
+                        fill="var(--primary)"
+                        label
+                      />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </DraggableCard>
+              </div>
+            )}
+          </ResponsiveGridLayout>
+        </>
+      )}
     </div>
   );
 }
