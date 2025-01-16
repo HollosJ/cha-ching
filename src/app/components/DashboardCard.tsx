@@ -9,9 +9,9 @@ type Props = {
 const DashboardCard = ({ title, children, className }: Props) => {
   return (
     <div
-      className={`p-4 bg-white border-2 relative overflow-y-auto ${className}`}
+      className={`p-4 bg-white border-2 relative overflow-y-auto text-gray-700 shadow-md ${className}`}
     >
-      {title && <h2 className="text-lg md:text-xl font-bold mb-4">{title}</h2>}
+      {title && <h2 className="mb-4 text-lg font-bold md:text-xl">{title}</h2>}
       {children}
     </div>
   );
