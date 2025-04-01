@@ -10,7 +10,7 @@ export type Data = {
   utilitiesElectricity: number;
   utilitiesWater: number;
   utilitiesGas: number;
-  subscriptions: Array<Expense>;
+  subscriptions: Expense[];
 };
 
 export type Expense = {

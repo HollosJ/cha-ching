@@ -1,9 +1,12 @@
-type Props = {
-  message: string | undefined;
-};
+import { ErrorMessage as FormikErrorMessage, ErrorMessageProps } from "formik";
 
-const ErrorMessage = ({ message }: Props) => {
-  return <p className="text-red-500">{message && message}</p>;
+const ErrorMessage = (props: ErrorMessageProps) => {
+  return (
+    <FormikErrorMessage
+      {...props}
+      render={(msg) => <p className="text-red-500">{msg}</p>}
+    />
+  );
 };
 
 export default ErrorMessage;

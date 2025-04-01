@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Tip = ({
   children,
@@ -9,7 +9,7 @@ const Tip = ({
 }) => {
   return (
     <div
-      className={`flex items-center gap-2 text-slate-600 ${className ?? ''}`}
+      className={`flex items-center gap-2 text-slate-600 ${className ?? ""}`}
     >
       {/* info icon */}
       <svg

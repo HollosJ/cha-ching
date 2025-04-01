@@ -1,5 +1,5 @@
-import React from 'react';
-import DashboardCard from './DashboardCard';
+import React from "react";
+import DashboardCard from "./DashboardCard";
 
 type Props = {
   children: React.ReactNode;

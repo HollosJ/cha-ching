@@ -1,12 +1,11 @@
-import React from 'react';
-import GetStartedForm from '@/app/components/GetStartedForm';
+import GetStartedForm from "@/app/components/GetStartedForm";
 
-function SetupPage() {
+function GetStartedPage() {
   return (
-    <div className="container my-8 md:max-w-screen-md">
+    <div className="container my-8 max-w-screen-md">
       <GetStartedForm />
     </div>
   );
 }
 
-export default SetupPage;
+export default GetStartedPage;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 type Row = {
   name: string;
@@ -16,11 +16,11 @@ const CostTable = ({ data, showTotal = true }: Props) => {
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full table-auto mb-4">
+      <table className="mb-4 w-full table-auto">
         <thead>
           <tr className="bg-gray-100">
-            <th className="px-4 py-2 text-left">Name</th>
-            <th className="px-4 py-2 text-right">Amount</th>
+            <th className="px-4 text-left">Name</th>
+            <th className="px-4 text-right">Amount</th>
           </tr>
         </thead>
         <tbody>
@@ -29,10 +29,10 @@ const CostTable = ({ data, showTotal = true }: Props) => {
               <tr key={index}>
                 <td className="px-4 py-2">{row.name}</td>
                 <td className="px-4 py-2 text-right">
-                  {row.amount > 0 ? `£${row.amount.toFixed(2)}` : 'N/A'}
+                  {row.amount > 0 ? `£${row.amount.toFixed(2)}` : "N/A"}
                 </td>
               </tr>
-            ) : null
+            ) : null,
           )}
         </tbody>
       </table>

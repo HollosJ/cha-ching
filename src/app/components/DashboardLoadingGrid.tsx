@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 
 const DashboardLoadingGrid = () => {
   return (
-    <div className="grid md:grid-cols-3 gap-4">
-      <div className="animate-pulse bg-slate-200 h-80"></div>
-      <div className="animate-pulse bg-slate-200 row-span-2"></div>
-      <div className="animate-pulse bg-slate-200 h-80"></div>
-      <div className="animate-pulse bg-slate-200 h-80"></div>
-      <div className="animate-pulse bg-slate-200 h-80"></div>
-      <div className="animate-pulse bg-slate-200 h-80"></div>
-      <div className="animate-pulse bg-slate-200 h-80"></div>
-      <div className="animate-pulse bg-slate-200 h-80"></div>
+    <div className="grid gap-4 md:grid-cols-3">
+      <div className="h-80 animate-pulse bg-slate-400"></div>
+      <div className="row-span-2 animate-pulse bg-slate-400"></div>
+      <div className="h-80 animate-pulse bg-slate-400"></div>
+      <div className="h-80 animate-pulse bg-slate-400"></div>
+      <div className="h-80 animate-pulse bg-slate-400"></div>
+      <div className="h-80 animate-pulse bg-slate-400"></div>
+      <div className="h-80 animate-pulse bg-slate-400"></div>
+      <div className="h-80 animate-pulse bg-slate-400"></div>
     </div>
   );
 };

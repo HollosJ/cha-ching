@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 type Props = {
   title?: string;
@@ -9,7 +9,7 @@ type Props = {
 const DashboardCard = ({ title, children, className }: Props) => {
   return (
     <div
-      className={`p-4 bg-white border-2 relative overflow-y-auto text-gray-700 shadow-md ${className}`}
+      className={`relative overflow-y-auto border-2 bg-white p-4 text-gray-700 ${className}`}
     >
       {title && <h2 className="mb-4 text-lg font-bold md:text-xl">{title}</h2>}
       {children}

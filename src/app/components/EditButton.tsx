@@ -1,5 +1,5 @@
-import React from 'react';
-import { toast } from 'sonner';
+import React from "react";
+import { toast } from "sonner";
 
 type Props = {
   editMode: boolean;
@@ -10,9 +10,9 @@ type Props = {
 const EditButton = ({ editMode, setEditMode, className }: Props) => {
   const handleEditMode = () => {
     if (!editMode) {
-      toast.info('Layout editing mode enabled');
+      toast.info("Layout editing mode enabled");
     } else {
-      toast.info('Layout editing mode disabled');
+      toast.info("Layout editing mode disabled");
     }
 
     setEditMode(!editMode);
@@ -21,9 +21,9 @@ const EditButton = ({ editMode, setEditMode, className }: Props) => {
   return (
     <button
       onClick={handleEditMode}
-      className={`${className || ''} flex items-center gap-2`}
+      className={`${className || ""} flex items-center gap-2`}
     >
-      {editMode ? 'Done' : 'Edit'}
+      {editMode ? "Done" : "Edit"}
 
       {editMode ? (
         <svg

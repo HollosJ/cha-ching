@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Pie, PieChart, ResponsiveContainer } from 'recharts';
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
-import { Responsive, WidthProvider } from 'react-grid-layout';
-import 'react-grid-layout/css/styles.css';
-import 'react-resizable/css/styles.css';
+import { Responsive, WidthProvider } from "react-grid-layout";
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
 
-import DraggableCard from '../components/DraggableCard';
-import CostTable from '../components/CostTable';
+import CostTable from "../components/CostTable";
+import DraggableCard from "../components/DraggableCard";
 
-import { LayoutItem, Data } from '../types';
-import EditButton from '../components/EditButton';
-import DashboardLoadingGrid from '../components/DashboardLoadingGrid';
+import DashboardLoadingGrid from "../components/DashboardLoadingGrid";
+import EditButton from "../components/EditButton";
+import { Data, LayoutItem } from "../types";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -26,42 +26,50 @@ function DashboardPage() {
   const [editMode, setEditMode] = useState<boolean>(false);
 
   useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem('data') || '{}');
+    // Fetch our data and layout from local storage
+    // If no data is found, redirect to the get started page
+    const fetchData = async () => {
+      const storedData = localStorage.getItem("data");
 
-    // If there is no data, redirect to the get started form
-    if (!Object.keys(savedData).length) {
-      router.push('/get-started');
-      return;
-    }
+      if (!storedData) {
+        router.push("/get-started");
+        return;
+      }
 
-    setData(savedData);
+      const parsedData = JSON.parse(storedData) as Data;
 
-    // If layout saved in local storage, use it, otherwise generate default
-    const savedLayout = JSON.parse(
-      localStorage.getItem('dashboardLayout') || '[]'
-    );
-    setLayout(savedLayout.length > 0 ? savedLayout : generateDefaultLayout());
+      const storedLayout = localStorage.getItem("dashboardLayout");
 
-    setLoading(false);
-  }, [router]);
+      const newLayout = storedLayout
+        ? JSON.parse(storedLayout)
+        : generateDefaultLayout();
+
+      setLayout(newLayout);
+
+      setData(parsedData);
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
 
   const generateDefaultLayout = (): LayoutItem[] => {
     return [
-      { i: 'income', x: 0, y: 0, w: 1, h: 1 },
-      { i: 'subscriptions', x: 1, y: 0, w: 1, h: 3 },
-      { i: 'home', x: 2, y: 0, w: 1, h: 1 },
+      { i: "income", x: 0, y: 0, w: 1, h: 1 },
+      { i: "subscriptions", x: 1, y: 0, w: 1, h: 3 },
+      { i: "home", x: 2, y: 0, w: 1, h: 1 },
 
-      { i: 'food', x: 0, y: 1, w: 1, h: 1 },
-      { i: 'car', x: 2, y: 1, w: 1, h: 1 },
+      { i: "food", x: 0, y: 1, w: 1, h: 1 },
+      { i: "car", x: 2, y: 1, w: 1, h: 1 },
 
-      { i: 'utilities', x: 0, y: 2, w: 1, h: 1 },
-      { i: 'tips', x: 2, y: 2, w: 1, h: 1 },
+      { i: "utilities", x: 0, y: 2, w: 1, h: 1 },
+      { i: "tips", x: 2, y: 2, w: 1, h: 1 },
     ];
   };
 
   const onLayoutChange = (newLayout: LayoutItem[]) => {
     setLayout(newLayout);
-    localStorage.setItem('dashboardLayout', JSON.stringify(newLayout));
+    localStorage.setItem("dashboardLayout", JSON.stringify(newLayout));
   };
 
   return (
@@ -75,100 +83,114 @@ function DashboardPage() {
           <EditButton
             editMode={editMode}
             setEditMode={setEditMode}
-            className="fixed bottom-4 right-4 hidden md:flex"
+            className="fixed right-4 bottom-4 hidden md:flex"
           />
 
           <ResponsiveGridLayout
-            layouts={{ lg: layout }}
-            breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-            cols={{ lg: 3, md: 2, sm: 1, xs: 1, xxs: 1 }}
+            containerPadding={[0, 0]}
             rowHeight={300}
+            layouts={{ lg: layout }}
+            cols={{ lg: 3, md: 3, sm: 3, xs: 3, xxs: 3 }}
             onLayoutChange={onLayoutChange}
             isResizable={editMode}
             isDraggable={editMode}
-            style={{ background: 'transparent' }}
-            containerPadding={[0, 0]}
+            className={
+              editMode
+                ? "bg-red-400/25 outline-2 outline-offset-2 outline-dotted"
+                : ""
+            }
+            compactType={null} // Prevents auto-compacting to one column
           >
-            <div key="income">
+            <div key="income" className={`${editMode ? "cursor-move" : ""}`}>
               <DraggableCard title="Income 💰">
-                <h3 className="text-2xl md:text-4xl font-bold mb-4 text-primary">
+                <h3 className="text-primary mb-4 text-2xl font-bold md:text-4xl">
                   £{data.income.toFixed(2)}
                 </h3>
               </DraggableCard>
             </div>
 
-            <div key="home">
+            <div key="home" className={`${editMode ? "cursor-move" : ""}`}>
               <DraggableCard title="Home 🏠">
                 <CostTable
                   data={[
-                    { name: 'Rent/Mortgage', amount: data.homePayment },
-                    { name: 'Council Tax', amount: data.homeCouncilTax },
+                    { name: "Rent/Mortgage", amount: data.homePayment },
+                    { name: "Council Tax", amount: data.homeCouncilTax },
                   ]}
                 />
               </DraggableCard>
             </div>
 
-            <div key="car">
+            <div key="car" className={`${editMode ? "cursor-move" : ""}`}>
               <DraggableCard title="Car 🚗">
                 <CostTable
                   data={[
-                    { name: 'Car Finance', amount: data.carFinance },
-                    { name: 'Car Insurance', amount: data.carInsurance },
-                    { name: 'Car Fuel', amount: data.carFuel },
+                    { name: "Car Finance 💳", amount: data.carFinance },
+                    { name: "Car Insurance 🛡️", amount: data.carInsurance },
+                    { name: "Car Fuel ⛽", amount: data.carFuel },
                   ]}
                 />
               </DraggableCard>
             </div>
 
-            <div key="food">
+            <div key="food" className={`${editMode ? "cursor-move" : ""}`}>
               <DraggableCard title="Food 🍽️">
                 <CostTable
                   data={[
-                    { name: 'Groceries', amount: data.foodGroceries },
-                    { name: 'Eating Out', amount: data.foodEatingOut },
+                    { name: "Groceries", amount: data.foodGroceries },
+                    { name: "Eating Out", amount: data.foodEatingOut },
                   ]}
                 />
               </DraggableCard>
             </div>
 
-            <div key="utilities">
-              <DraggableCard title="Utilities 🔌">
+            <div key="utilities" className={`${editMode ? "cursor-move" : ""}`}>
+              <DraggableCard title="Utilities 💡">
                 <CostTable
                   data={[
-                    { name: 'Electricity', amount: data.utilitiesElectricity },
-                    { name: 'Water', amount: data.utilitiesWater },
-                    { name: 'Gas', amount: data.utilitiesGas },
+                    {
+                      name: "Electricity ⚡",
+                      amount: data.utilitiesElectricity,
+                    },
+                    { name: "Water 💧", amount: data.utilitiesWater },
+                    { name: "Gas 🔥", amount: data.utilitiesGas },
                   ]}
                 />
               </DraggableCard>
             </div>
 
             {data.subscriptions && data.subscriptions.length > 0 && (
-              <div key="subscriptions">
+              <div
+                key="subscriptions"
+                className={`${editMode ? "cursor-move" : ""}`}
+              >
                 <DraggableCard title="Subscriptions 📺">
                   <CostTable
-                    data={data.subscriptions.map((sub) => ({
-                      name: sub.name,
-                      amount: sub.cost,
+                    data={data.subscriptions.map((subscription) => ({
+                      name: subscription.name,
+                      amount: subscription.cost,
                     }))}
                     showTotal={false}
                   />
                   <ResponsiveContainer width="100%" height={200}>
-                    <PieChart width={400} height={400}>
+                    <PieChart width={100} height={200}>
                       <Pie
-                        data={data.subscriptions.map((sub) => ({
-                          name: sub.name,
-                          value: sub.cost,
+                        data={data.subscriptions.map((subscription) => ({
+                          name: subscription.name,
+                          value: subscription.cost,
                         }))}
                         dataKey="value"
                         nameKey="name"
-                        cx="50%"
-                        cy="50%"
+                        cy={100}
+                        startAngle={180}
+                        endAngle={0}
                         innerRadius={60}
                         outerRadius={80}
-                        fill="var(--primary)"
+                        paddingAngle={5}
+                        fill="var(--color-primary)"
                         label
                       />
+
+                      <Tooltip />
                     </PieChart>
                   </ResponsiveContainer>
                 </DraggableCard>
