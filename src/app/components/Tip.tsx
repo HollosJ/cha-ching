@@ -1,10 +1,10 @@
-import React from "react";
+import { ReactNode } from "react";
 
 const Tip = ({
   children,
   className,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }) => {
   return (

@@ -1,10 +1,24 @@
+import ErrorMessage from "@/app/components/ErrorMessage";
 import { Field } from "formik";
-import ErrorMessage from "../ErrorMessage";
 
-export default function Car() {
+export default function Transport() {
   return (
     <>
       <p>Next, enter your monthly car payments.</p>
+
+      <div className="field-row mt-8">
+        <label htmlFor="publicTransport">Public Transport</label>
+
+        <Field
+          className="input"
+          id="publicTransport"
+          name="publicTransport"
+          type="number"
+          min={0}
+        />
+
+        <ErrorMessage name="publicTransport" />
+      </div>
 
       {/* Car Payment */}
       <div className="field-row mt-8">
@@ -15,7 +29,6 @@ export default function Car() {
           id="carFinance"
           name="carFinance"
           type="number"
-          placeholder="e.g. 100"
           min={0}
         />
 
@@ -31,7 +44,6 @@ export default function Car() {
           id="carInsurance"
           name="carInsurance"
           type="number"
-          placeholder="e.g. 100"
           min={0}
         />
 
@@ -47,7 +59,6 @@ export default function Car() {
           id="carFuel"
           name="carFuel"
           type="number"
-          placeholder="e.g. 100"
           min={0}
         />
 

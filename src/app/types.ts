@@ -1,7 +1,8 @@
-export type Data = {
+export type FormData = {
   income: number;
   homePayment: number;
   homeCouncilTax: number;
+  publicTransport: number;
   carFinance: number;
   carInsurance: number;
   carFuel: number;
@@ -16,12 +17,4 @@ export type Data = {
 export type Expense = {
   name: string;
   cost: number;
-};
-
-export type LayoutItem = {
-  i: string;
-  x: number;
-  y: number;
-  w: number;
-  h: number;
 };

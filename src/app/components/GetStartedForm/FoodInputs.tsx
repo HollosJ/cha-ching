@@ -1,5 +1,5 @@
+import ErrorMessage from "@/app/components/ErrorMessage";
 import { Field } from "formik";
-import ErrorMessage from "../ErrorMessage";
 
 export default function FoodForm() {
   return (
@@ -15,7 +15,6 @@ export default function FoodForm() {
           id="foodGroceries"
           name="foodGroceries"
           type="number"
-          placeholder="e.g. 100"
           min={0}
         />
 
@@ -31,7 +30,6 @@ export default function FoodForm() {
           id="foodEatingOut"
           name="foodEatingOut"
           type="number"
-          placeholder="e.g. 100"
           min={0}
         />
 

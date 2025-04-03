@@ -1,35 +1,31 @@
-import React from "react";
-
-type Row = {
-  name: string;
-  amount: number;
-};
+import { Expense } from "@/app/types";
 
 type Props = {
-  data: Row[];
+  data: Expense[];
   showTotal?: boolean;
 };
 
 const CostTable = ({ data, showTotal = true }: Props) => {
-  // If total amount is 0, don't show the table
-  if (data.reduce((sum, row) => sum + row.amount, 0) === 0) return null;
+  // If total cost is 0, don't show the table
+  if (data.reduce((sum, row) => sum + row.cost, 0) === 0) return null;
 
   return (
     <div className="overflow-x-auto">
-      <table className="mb-4 w-full table-auto">
+      <table className="w-full table-auto text-sm">
         <thead>
-          <tr className="bg-gray-100">
-            <th className="px-4 text-left">Name</th>
-            <th className="px-4 text-right">Amount</th>
+          <tr>
+            <th className="text-left">Name</th>
+            <th className="text-right">Amount</th>
           </tr>
         </thead>
+
         <tbody>
           {data.map((row, index) =>
-            row.amount > 0 ? (
-              <tr key={index}>
-                <td className="px-4 py-2">{row.name}</td>
-                <td className="px-4 py-2 text-right">
-                  {row.amount > 0 ? `£${row.amount.toFixed(2)}` : "N/A"}
+            row.cost > 0 ? (
+              <tr key={index} className="first:mt-4">
+                <td>{row.name}</td>
+                <td className="text-right">
+                  {row.cost > 0 ? `£${row.cost.toFixed(2)}` : "N/A"}
                 </td>
               </tr>
             ) : null,
@@ -38,9 +34,9 @@ const CostTable = ({ data, showTotal = true }: Props) => {
       </table>
 
       {showTotal && (
-        <div className="text-right">
+        <div className="mt-2 text-right font-bold">
           Total: £
-          {data.reduce((sum, row) => sum + (row.amount || 0), 0).toFixed(2)}
+          {data.reduce((sum, row) => sum + (row.cost || 0), 0).toFixed(2)}
         </div>
       )}
     </div>

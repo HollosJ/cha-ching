@@ -1,5 +1,5 @@
+import ErrorMessage from "@/app/components/ErrorMessage";
 import { Field } from "formik";
-import ErrorMessage from "../ErrorMessage";
 
 export default function Income() {
   return (

@@ -1,19 +1,17 @@
+import ErrorMessage from "@/app/components/ErrorMessage";
 import { Expense } from "@/app/types";
 import { Field, FieldArray } from "formik";
-import ErrorMessage from "../ErrorMessage";
 
-type SubscriptionsProps = {
+export default function Subscriptions({
+  subscriptions,
+}: {
   subscriptions: Expense[];
-};
-
-export default function Subscriptions({ subscriptions }: SubscriptionsProps) {
+}) {
   return (
     <>
       <p>Finally, enter your monthly subscriptions.</p>
 
       <div className="field-row mt-8">
-        <label htmlFor="subscriptions">Subscriptions</label>
-
         <FieldArray
           name="subscriptions"
           render={(arrayHelpers) => (
@@ -21,10 +19,10 @@ export default function Subscriptions({ subscriptions }: SubscriptionsProps) {
               {Array.isArray(subscriptions) && subscriptions.length > 0 ? (
                 subscriptions.map((_, index) => (
                   <div key={index}>
-                    <div className="mb-2 flex gap-2">
+                    <div className="flex">
                       <Field
                         name={`subscriptions.${index}.name`}
-                        placeholder="Subscription name"
+                        placeholder="Name"
                         className="input flex-grow"
                       />
 
@@ -39,7 +37,7 @@ export default function Subscriptions({ subscriptions }: SubscriptionsProps) {
                       <button
                         type="button"
                         onClick={() => arrayHelpers.remove(index)}
-                        className="button button--secondary"
+                        className="button button--secondary w-24"
                       >
                         Remove
                       </button>

@@ -1,35 +1,36 @@
 "use client";
 
+import FoodInputs from "@/app/components/GetStartedForm/FoodInputs";
+import HouseInputs from "@/app/components/GetStartedForm/HouseInputs";
+import IncomeInputs from "@/app/components/GetStartedForm/IncomeInputs";
+import SubscriptionsInputs from "@/app/components/GetStartedForm/SubscriptionsInputs";
+import TransportInputs from "@/app/components/GetStartedForm/TransportInputs";
+import UtilitiesInputs from "@/app/components/GetStartedForm/UtilitiesInputs";
 import ProgressBar from "@/app/components/ProgressBar";
-import { Expense } from "@/app/types";
+import { Expense, FormData } from "@/app/types";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { array, number, object, string } from "yup";
-import Car from "./Car";
-import Food from "./Food";
-import House from "./House";
-import Income from "./Income";
-import Subscriptions from "./Subscriptions";
-import Utilities from "./Utilities";
 
 // Form values - these could be a number, or blank (unfilled)
 type FormValues = {
-  income: number | "";
+  income: number;
 
-  homePayment: number | "";
-  homeCouncilTax: number | "";
+  homePayment: number;
+  homeCouncilTax: number;
 
-  carFinance: number | "";
-  carInsurance: number | "";
-  carFuel: number | "";
+  publicTransport: number;
+  carFinance: number;
+  carInsurance: number;
+  carFuel: number;
 
-  foodGroceries: number | "";
-  foodEatingOut: number | "";
+  foodGroceries: number;
+  foodEatingOut: number;
 
-  utilitiesElectricity: number | "";
-  utilitiesWater: number | "";
-  utilitiesGas: number | "";
+  utilitiesElectricity: number;
+  utilitiesWater: number;
+  utilitiesGas: number;
 
   subscriptions: Expense[];
 };
@@ -39,22 +40,23 @@ type Step = {
   component: React.ComponentType<FormValues>;
 };
 
-const initialValues: FormValues = {
-  income: "",
+const initialValues: FormData = {
+  income: 0,
 
-  homePayment: "",
-  homeCouncilTax: "",
+  homePayment: 0,
+  homeCouncilTax: 0,
 
-  carFinance: "",
-  carInsurance: "",
-  carFuel: "",
+  publicTransport: 0,
+  carFinance: 0,
+  carInsurance: 0,
+  carFuel: 0,
 
-  foodGroceries: "",
-  foodEatingOut: "",
+  foodGroceries: 0,
+  foodEatingOut: 0,
 
-  utilitiesElectricity: "",
-  utilitiesWater: "",
-  utilitiesGas: "",
+  utilitiesElectricity: 0,
+  utilitiesWater: 0,
+  utilitiesGas: 0,
 
   subscriptions: [],
 };
@@ -62,21 +64,22 @@ const initialValues: FormValues = {
 const validationSchema = object({
   income: number()
     .required("Income is required")
-    .min(0, "Income must be greater than 0"),
+    .min(0, "Income cannot be below 0"),
 
-  homePayment: number().min(0, "Rent/Mortgage Payments must be greater than 0"),
-  homeCouncilTax: number().min(0, "Council Tax must be greater than 0"),
+  homePayment: number().min(0, "Rent/Mortgage Payments cannot be below 0"),
+  homeCouncilTax: number().min(0, "Council Tax cannot be below 0"),
 
-  carFinance: number().min(0, "Finance Payments must be greater than 0"),
-  carInsurance: number().min(0, "Car Insurance must be greater than 0"),
-  carFuel: number().min(0, "Fuel must be greater than 0"),
+  publicTransport: number().min(0, "Public Transport cannot be below 0"),
+  carFinance: number().min(0, "Finance Payments cannot be below 0"),
+  carInsurance: number().min(0, "Car Insurance cannot be below 0"),
+  carFuel: number().min(0, "Fuel cannot be below 0"),
 
-  foodGroceries: number().min(0, "Groceries must be greater than 0"),
-  foodEatingOut: number().min(0, "Eating Out must be greater than 0"),
+  foodGroceries: number().min(0, "Groceries cannot be below 0"),
+  foodEatingOut: number().min(0, "Eating Out cannot be below 0"),
 
-  utilitiesElectricity: number().min(0, "Electricity must be greater than 0"),
-  utilitiesWater: number().min(0, "Water must be greater than 0"),
-  utilitiesGas: number().min(0, "Gas must be greater than 0"),
+  utilitiesElectricity: number().min(0, "Electricity cannot be below 0"),
+  utilitiesWater: number().min(0, "Water cannot be below 0"),
+  utilitiesGas: number().min(0, "Gas cannot be below 0"),
 
   subscriptions: array().of(
     object({
@@ -90,35 +93,35 @@ const validationSchema = object({
 });
 
 const GetStartedForm = () => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [data, setData] = useState({});
-  const [submitting, setSubmitting] = useState(false);
+  const [currentStep, setCurrentStep] = useState<number>(0);
+  const [data, setData] = useState<FormData | null>();
+  const [submitting, setSubmitting] = useState<boolean>(false);
   const router = useRouter();
 
   const steps: Step[] = [
     {
       name: "Income 💰",
-      component: Income,
+      component: IncomeInputs,
     },
     {
       name: "House 🏠",
-      component: House,
+      component: HouseInputs,
     },
     {
-      name: "Car 🚗",
-      component: Car,
+      name: "Transport 🚗",
+      component: TransportInputs,
     },
     {
-      name: "Food 🍔",
-      component: Food,
+      name: "FoodInputs 🍔",
+      component: FoodInputs,
     },
     {
       name: "Utilities 💡",
-      component: Utilities,
+      component: UtilitiesInputs,
     },
     {
       name: "Subscriptions 📺",
-      component: Subscriptions,
+      component: SubscriptionsInputs,
     },
   ];
 
@@ -178,7 +181,7 @@ const GetStartedForm = () => {
   };
 
   return (
-    <div className="relative border-2 border-black bg-white p-4 text-black md:p-8">
+    <div className="relative border-2 border-black bg-white p-4 text-black md:p-8 dark:bg-slate-800 dark:text-slate-300">
       <ProgressBar progress={(currentStep / (steps.length - 1)) * 100} />
 
       <h2>{steps[currentStep].name}</h2>

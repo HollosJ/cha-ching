@@ -1,5 +1,5 @@
+import ErrorMessage from "@/app/components/ErrorMessage";
 import { Field } from "formik";
-import ErrorMessage from "../ErrorMessage";
 
 export default function House() {
   return (
@@ -7,7 +7,7 @@ export default function House() {
       <p>Next, enter your monthly house payments.</p>
 
       {/* Rent/Mortgage */}
-      <div className="mt-8 field-row">
+      <div className="field-row mt-8">
         <label htmlFor="homePayment">Rent/Mortgage Payments</label>
 
         <Field
@@ -15,7 +15,6 @@ export default function House() {
           id="homePayment"
           name="homePayment"
           type="number"
-          placeholder="e.g. 1000"
           min={0}
         />
 
@@ -23,7 +22,7 @@ export default function House() {
       </div>
 
       {/* Council Tax */}
-      <div className="mt-8 field-row">
+      <div className="field-row mt-8">
         <label htmlFor="homeCouncilTax">Council Tax</label>
 
         <Field
@@ -31,7 +30,6 @@ export default function House() {
           id="homeCouncilTax"
           name="homeCouncilTax"
           type="number"
-          placeholder="e.g. 100"
           min={0}
         />
 

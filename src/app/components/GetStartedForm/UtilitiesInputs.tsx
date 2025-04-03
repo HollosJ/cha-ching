@@ -1,5 +1,5 @@
+import ErrorMessage from "@/app/components/ErrorMessage";
 import { Field } from "formik";
-import ErrorMessage from "../ErrorMessage";
 
 export default function Utilities() {
   return (
@@ -15,7 +15,6 @@ export default function Utilities() {
           id="utilitiesElectricity"
           name="utilitiesElectricity"
           type="number"
-          placeholder="e.g. 100"
           min={0}
         />
 
@@ -31,7 +30,6 @@ export default function Utilities() {
           id="utilitiesWater"
           name="utilitiesWater"
           type="number"
-          placeholder="e.g. 100"
           min={0}
         />
 
@@ -47,7 +45,6 @@ export default function Utilities() {
           id="utilitiesGas"
           name="utilitiesGas"
           type="number"
-          placeholder="e.g. 100"
           min={0}
         />
 

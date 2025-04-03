@@ -1,8 +1,6 @@
-import React from "react";
-
 function ProgressBar({ progress }: { progress: number }) {
   return (
-    <div className="absolute top-0 left-0 h-2 w-full bg-slate-100 transition">
+    <div className="absolute top-0 left-0 h-2 w-full bg-slate-100 transition dark:bg-slate-700">
       <div
         className="bg-primary h-full"
         style={{

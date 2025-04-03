@@ -1,17 +1,14 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 /* https://tailwindcss.com/docs/theme */
 @theme {
-  /* Your custom theme styles go here (replaces :root) */
-
   --color-primary: var(--color-emerald-500);
+  --color-danger: var(--color-red-700);
 
   --ease-boing: cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-/* Add your own default base styles for specific HTML elements, for example: */
+/* Default base styles for specific HTML elements */
 @layer base {
   h1,
   h2,
@@ -35,7 +32,7 @@
   }
 
   .input {
-    @apply focus-within:border-primary focus:border-primary active:border-primary w-full border-2 border-black p-2 text-lg outline-none;
+    @apply focus-within:border-primary focus:border-primary active:border-primary w-full border-2 border-black p-2 text-lg outline-none dark:border-slate-700;
   }
 
   .button {
@@ -55,7 +52,7 @@
   }
 
   .button--danger {
-    @apply bg-red-500 text-white;
+    @apply bg-danger text-white;
   }
 }
 
