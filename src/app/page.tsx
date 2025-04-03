@@ -2,7 +2,7 @@ import GetStartedButton from "@/app/components/GetStartedButton";
 
 export default function HomePage() {
   return (
-    <main className="container my-8 md:my-16 dark:text-slate-300">
+    <main className="container my-8 md:my-16 md:max-w-screen-lg dark:text-slate-300">
       <div className="grid md:grid-cols-2">
         <div>
           <h1 className="text-4xl text-pretty">
