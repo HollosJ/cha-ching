@@ -36,7 +36,7 @@
   }
 
   .button {
-    @apply inline-flex border-2 border-black px-4 py-2 transition hover:brightness-95;
+    @apply inline-flex items-center border-2 border-black px-4 py-2 transition hover:brightness-95;
   }
 
   .button:disabled {
