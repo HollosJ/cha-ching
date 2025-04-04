@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cha-Ching
 
-## Getting Started
+Cha-Ching is a personal finance dashboard built with **Next.js** and **React**, designed to give users a comprehensive, high-level overview of their financial situation. This project is a personal tool aimed at simplifying financial tracking and presenting data in a clear, digestible format.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Income and Expense Inputs with Formik and Yup
+- Users can enter income and expense details through a **multi-step form** powered by **Formik**, with **Yup** for robust form validation.
+- Formik was particularly useful for creating the subscriptions input, leveraging **FieldArray** to handle dynamic data entry effectively.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Persistent Data Storage
+- Using **localStorage**, Cha-Ching retains user data between sessions. Users can close the dashboard and return later, picking up right where they left off without the need for an external database.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Customisable Dashboard
+- Users can reorder their dashboard however they see fit. This customisation is saved across sessions with **localStorage**, thanks to **dnd-kit**, which powers the drag-and-drop functionality.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Insights into Spending Habits
+- Cha-Ching provides users with insights into their spending habits, including a breakdown of expenses and income, offering a clear overview of their financial health.
 
-## Learn More
+## Future Improvements
+- **Authentication and Server Storage**: Currently, Cha-Ching relies on **localStorage**, limiting cross-device tracking. To remedy this, we could implement authentication and server storage for data syncing.
+- **Data Visualisation and Tips**: Users will benefit from additional data visualisation or tips that compare their spending to their income, helping them better understand their financial trends.
+- **Easy Data Updates**: A user-friendly interface for updating financial data as changes occur in real life, allowing for seamless updates and better tracking.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Technologies Used
+- **Next.js**
+- **React**
+- **Formik**
+- **Yup**
+- **Tailwind CSS**
+- **DnD Kit**
+- **LocalStorage**
