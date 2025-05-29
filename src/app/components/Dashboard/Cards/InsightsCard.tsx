@@ -9,6 +9,7 @@ type Insight = {
 
 const WEEKLY_GROCERY_COST = 63.5;
 const MONTHLY_GROCERY_COST = WEEKLY_GROCERY_COST * 4.33;
+const MONTHLY_HOUSING_COST = 0.3;
 
 export default function InsightsCard({ data }: { data: FormData }) {
   const insights: Insight[] = [
@@ -22,8 +23,26 @@ export default function InsightsCard({ data }: { data: FormData }) {
       tone: "negative",
       condition: (data) => data.foodGroceries > MONTHLY_GROCERY_COST,
     },
+
+    {
+      message: `Your housing costs are under ${MONTHLY_HOUSING_COST * 100}% of your income - that's financially healthy.`,
+      tone: "positive",
+      condition: (data) => {
+        const housing = data.homePayment + data.homeCouncilTax;
+        return data.income > 0 && housing / data.income <= MONTHLY_HOUSING_COST;
+      },
+    },
+    {
+      message: `Your housing costs are above ${MONTHLY_HOUSING_COST * 100}% of your income - that's often considered high.`,
+      tone: "negative",
+      condition: (data) => {
+        const housing = data.homePayment + data.homeCouncilTax;
+        return data.income > 0 && housing / data.income > MONTHLY_HOUSING_COST;
+      },
+    },
   ];
 
+  // Grab only insights where the condition returns true
   const filteredInsights = insights.filter((insight) =>
     insight.condition(data),
   );
