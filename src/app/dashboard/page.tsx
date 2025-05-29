@@ -16,6 +16,7 @@ import {
   DragEndEvent,
   KeyboardSensor,
   PointerSensor,
+  TouchSensor,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
@@ -35,6 +36,7 @@ function DashboardPage() {
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
+    useSensor(TouchSensor),
   );
 
   const CARD_COMPONENTS = [
