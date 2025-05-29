@@ -1,5 +1,5 @@
 import CostTable from "@/app/components/CostTable";
-import DashboardCard from "@/app/components/DashboardCard";
+import DashboardCard from "@/app/components/Dashboard/Cards/DashboardCard";
 import { FormData } from "@/app/types";
 
 export default function FoodCard({ data }: { data: FormData }) {

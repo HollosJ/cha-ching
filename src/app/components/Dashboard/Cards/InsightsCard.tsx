@@ -1,4 +1,4 @@
-import DashboardCard from "@/app/components/DashboardCard";
+import DashboardCard from "@/app/components/Dashboard/Cards/DashboardCard";
 import { FormData } from "@/app/types";
 
 type Insight = {

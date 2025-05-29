@@ -1,5 +1,5 @@
 import { FormData } from "@/app/types";
-import DashboardCard from "@/app/components/DashboardCard";
+import DashboardCard from "@/app/components/Dashboard/Cards/DashboardCard";
 import CostTable from "@/app/components/CostTable";
 import { Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
