@@ -32,7 +32,7 @@ export function SortableItem({ id, children, className }: SortableItemProps) {
     >
       {/* Drag handle */}
       <div
-        className="justify-content-start absolute top-4 right-4 z-10 inline-grid cursor-grab grid-cols-2 gap-1 p-2 hover:bg-slate-300 active:cursor-grabbing"
+        className="justify-content-start absolute top-4 right-4 z-10 inline-grid cursor-grab touch-none grid-cols-2 gap-1 p-2 hover:bg-slate-300 active:cursor-grabbing"
         {...attributes}
         {...listeners}
       >

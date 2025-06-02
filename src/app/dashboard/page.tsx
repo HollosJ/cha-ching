@@ -20,6 +20,7 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
+import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 import {
   rectSortingStrategy,
   SortableContext,
@@ -149,6 +150,7 @@ function DashboardPage() {
           sensors={sensors}
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
+          modifiers={[restrictToWindowEdges]}
         >
           <div className="grid gap-2 md:grid-cols-3 md:grid-rows-3">
             <SortableContext items={layout} strategy={rectSortingStrategy}>
